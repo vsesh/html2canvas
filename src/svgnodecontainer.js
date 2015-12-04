@@ -10,7 +10,9 @@ function SVGNodeContainer(node, _native) {
         self.image = new Image();
         self.image.onload = resolve;
         self.image.onerror = reject;
-        self.image.src = "data:image/svg+xml," + (new XMLSerializer()).serializeToString(node);
+        node.removeAttribute('style');
+        var src = (new XMLSerializer()).serializeToString(node);
+        self.image.src = "data:image/svg+xml," + src;
         if (self.image.complete === true) {
             resolve(self.image);
         }
